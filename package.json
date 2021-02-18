@@ -1,0 +1,31 @@
+{
+  "name": "m-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.ts",
+  "scripts": {
+    "start": "ts-node src/app.ts",
+    "dev": "nodemon src/app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.11.16",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/preset-env": "^7.11.5",
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.28",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.5"
+  }
+}
