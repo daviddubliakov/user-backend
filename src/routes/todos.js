@@ -25,4 +25,10 @@ router.delete('/delete', (req, res) => {
   ).then(() => res.status(200).send('User is successfully deleted!'));
 })
 
+router.get('/user/:_id', (req, res) => {
+  Todo.findOne({ _id: req.params._id }, (err, user) => {
+    res.send(user);
+  });
+})
+
 export default router;
