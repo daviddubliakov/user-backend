@@ -13,7 +13,7 @@ const databaseName = process.env.DATABASE_NAME;
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/todos", routes.todos);
+app.use("/users", routes.users);
 
 const start = async () => {
   try {

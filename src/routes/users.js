@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import Todo from '../models/Todo';
+import User from '../models/User';
 import { oneOf, check, body, validationResult } from 'express-validator';
 
 const router = Router();
 
 router.get('/', async (req, res) => {
-  Todo.find({}, (err, users) => {
+  User.find({}, (err, users) => {
     res.send(users);
   });
 })
@@ -26,9 +26,9 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const newTodoObj = new Todo(req.body);
+    const newUserObj = new User(req.body);
 
-    newTodoObj.save(err => {
+    newUserObj.save(err => {
       if (err) return res.status(500).send(err);
       return res.status(200).send({ message: 'User successfully created!' });
     });
@@ -36,13 +36,13 @@ router.post(
 
 
 router.delete('/delete', (req, res) => {
-  Todo.deleteOne(
+  User.deleteOne(
     { _id: req.body._id }
   ).then(() => res.status(200).send({ message: 'User is successfully deleted!' }));
 })
 
 router.get('/user/:_id', (req, res) => {
-  Todo.findOne({ _id: req.params._id }, (err, user) => {
+  User.findOne({ _id: req.params._id }, (err, user) => {
     res.send(user);
   });
 })
@@ -62,7 +62,7 @@ router.put('/user/:_id',
       return res.status(400).json({ errors: errors.array() });
     }
 
-    Todo.findOneAndUpdate({
+    User.findOneAndUpdate({
       _id: req.body._id
     },
       {
