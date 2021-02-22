@@ -5,7 +5,7 @@ import { oneOf, check, body, validationResult } from 'express-validator';
 const router = Router();
 
 router.get('/', async (req, res) => {
-  Todo.find({}, (err, users) => {
+  User.find({}, (err, users) => {
     res.send(users);
   });
 })
@@ -26,9 +26,9 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const newTodoObj = new User(req.body);
+    const newUserObj = new User(req.body);
 
-    newTodoObj.save(err => {
+    newUserObj.save(err => {
       if (err) return res.status(500).send(err);
       return res.status(200).send({ message: 'User successfully created!' });
     });
