@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import Todo from '../models/Todo';
+import { oneOf, check, body, validationResult } from 'express-validator';
 
 const router = Router();
 
@@ -9,14 +10,29 @@ router.get('/', async (req, res) => {
   });
 })
 
-router.post('/create', async (req, res) => {
-  const newTodoObj = new Todo(req.body);
+router.post(
+  '/create',
+  body('firstName').notEmpty().isAlpha(),
+  body('lastName').notEmpty().isAlpha(),
+  body('age').notEmpty().isNumeric(),
+  oneOf([
+    check('avatar').isEmpty(),
+    check('avatar').isURL(),
+  ]),
+  async (req, res) => {
+    const errors = validationResult(req);
 
-  newTodoObj.save(err => {
-    if (err) return res.status(500).send(err);
-    return res.status(200).send({ message: 'User successfully created!' });
-  });
-})
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const newTodoObj = new Todo(req.body);
+
+    newTodoObj.save(err => {
+      if (err) return res.status(500).send(err);
+      return res.status(200).send({ message: 'User successfully created!' });
+    });
+  })
 
 
 router.delete('/delete', (req, res) => {
