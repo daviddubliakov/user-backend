@@ -7,4 +7,4 @@ const userSchema = new Schema({
   avatar: String,
 });
 
-export default model('Todo', userSchema);
+export default model('User', userSchema);
