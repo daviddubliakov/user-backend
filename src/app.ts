@@ -6,8 +6,6 @@ import cors from "cors";
 
 const app = express();
 
-const userName = process.env.USER_NAME;
-const userPassword = process.env.USER_PASSWORD;
 const databaseName = process.env.DATABASE_NAME;
 
 app.use(cors());
@@ -17,13 +15,10 @@ app.use("/users", routes.users);
 
 const start = async () => {
   try {
-    await mongoose.connect(
-      `mongodb+srv://${userName}:${userPassword}@cluster0.l5sdh.mongodb.net/${databaseName}`,
-      {
-        useNewUrlParser: true,
-        useFindAndModify: false,
-      }
-    );
+    await mongoose.connect(`mongodb://localhost:27017/${databaseName}`, {
+      useNewUrlParser: true,
+      useFindAndModify: false,
+    });
     app.listen(process.env.PORT, () => {
       console.log("Server has been started...");
     });
